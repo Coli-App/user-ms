@@ -18,6 +18,9 @@ export class UsersService {
         email: createUserDto.email,
         password: createUserDto.password,
         email_confirm: true,
+        app_metadata: {
+          user_role: createUserDto.role 
+        }
       });
 
     if (authError) {
@@ -27,7 +30,7 @@ export class UsersService {
     const newUser = {
       name: createUserDto.name,
       email: createUserDto.email,
-      rol: createUserDto.rol,
+      rol: createUserDto.role,
       auth_id: authResult.user?.id,
     };
     const { data, error } = await this.supabase

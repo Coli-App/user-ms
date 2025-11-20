@@ -35,5 +35,5 @@ export class CreateUserDto {
     })
     @IsNotEmpty()
     @IsString()
-    rol: string;
+    role: string;
 }
