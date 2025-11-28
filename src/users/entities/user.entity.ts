@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class User {
     @ApiProperty({ 
-        description: 'ID único del usuario', 
+        description: 'ID único del usuario en la tabla de usuarios', 
         example: 'uuid-123-456-789' 
     })
     id: string;
@@ -30,6 +30,12 @@ export class User {
         enum: ['admin', 'user', 'moderator'] 
     })
     rol: string;
+
+    @ApiProperty({ 
+        description: 'ID de autenticación de Supabase Auth', 
+        example: 'uuid-auth-123-456' 
+    })
+    auth_id: string;
 
     @ApiProperty({ 
         description: 'Fecha de creación del usuario', 

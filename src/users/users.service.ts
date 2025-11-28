@@ -18,9 +18,6 @@ export class UsersService {
         email: createUserDto.email,
         password: createUserDto.password,
         email_confirm: true,
-        app_metadata: {
-          user_role: createUserDto.role 
-        }
       });
 
     if (authError) {
@@ -41,6 +38,20 @@ export class UsersService {
 
     if (error) {
       throw new Error(`Error al crear usuario en la tabla: ${error.message}`);
+    }
+
+    const { error: updateError } = await this.supabase.auth.admin.updateUserById(
+      authResult.user?.id,
+      {
+        app_metadata: {
+          user_id: data.id,
+          user_role: createUserDto.role
+        }
+      }
+    );
+
+    if (updateError) {
+      throw new Error(`Error al actualizar metadata del usuario: ${updateError.message}`);
     }
 
     return data;
