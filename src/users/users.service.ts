@@ -27,7 +27,7 @@ export class UsersService {
     const newUser = {
       name: createUserDto.name,
       email: createUserDto.email,
-      rol: createUserDto.role,
+      rol: createUserDto.rol,
       auth_id: authResult.user?.id,
     };
     const { data, error } = await this.supabase
@@ -45,7 +45,7 @@ export class UsersService {
       {
         app_metadata: {
           user_id: data.id,
-          user_role: createUserDto.role
+          user_role: createUserDto.rol
         }
       }
     );
@@ -94,6 +94,8 @@ export class UsersService {
     if (updateUserDto.password) {
       authUpdates.password = updateUserDto.password;
     }
+
+    
 
     if (Object.keys(authUpdates).length > 0) {
       await this.updateAuthUser(user.auth_id, authUpdates);
